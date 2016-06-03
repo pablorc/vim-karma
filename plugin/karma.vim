@@ -2,6 +2,7 @@ let s:plugin_name = 'vim-karma'
 
 let s:ErrorCode = 1
 let s:SuccessCode = 0
+let s:karmaPath = './node_modules/karma/bin/karma'
 
 function! s:ErrorMsg(message)
   echoerr string('Error('.s:plugin_name.'): '.a:message)
@@ -85,7 +86,7 @@ function! RunSpecs(...)
   execute 'chdir' s:find_project_root_dir(getcwd())
 
   let spec = get(a:000, 0, '')
-  let karma_command = escape(substitute("karma start --single-run=true --client.useIframe=true --client.captureConsole=true --client.mocha.grep='{spec}'", "{spec}", spec, "g"), '#')
+  let karma_command = escape(substitute("./node_modules/karma/bin/karma start --single-run=true --client.useIframe=true --client.captureConsole=true --client.mocha.grep='{spec}'", "{spec}", spec, "g"), '#')
 
   execute '!clear && echo "'.karma_command.'" && '.karma_command
 endfunction
